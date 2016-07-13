@@ -2,7 +2,7 @@
 <head>
 </head>
 <body>
-Hello Vishal HTML User, {{username}}
+Hello HTML User, {{username}}
 <form method='get' action='/lout'>
 <input type='Submit' value='Logout'>
 </form>
