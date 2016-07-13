@@ -15,16 +15,15 @@ class GlobalClass(webapp2.RequestHandler):
     user_login=''
        
 
-class Login(webapp2.RequestHandler):
+class SignUp(webapp2.RequestHandler):
     def get(self):
         #import pdb;pdb.set_trace()
         print 'LoginGet'
         #status,lu=self.check_User()
         print GlobalClass.user_login
         if GlobalClass.user_login=='':
-            print 'LoginGet if'+str(GlobalClass.user_login)+'dsda'
             template_values=dict()
-            template = JINJA_ENVIRONMENT.get_template('login.html')
+            template = JINJA_ENVIRONMENT.get_template('signup.html')
             self.response.write(template.render(template_values))
         else:
             print 'Login Get Else'
@@ -57,7 +56,7 @@ class lout(webapp2.RequestHandler):
         self.redirect('/')
 
 app = webapp2.WSGIApplication([
-    ('/', Login),
+    ('/', SignUp),
     ('/welcome.*',Welcome),
     ('/lout',lout)
 ], debug=True)
