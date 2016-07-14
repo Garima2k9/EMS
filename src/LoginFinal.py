@@ -15,15 +15,16 @@ class GlobalClass(webapp2.RequestHandler):
     user_login=''
        
 
-class SignUp(webapp2.RequestHandler):
+class Login(webapp2.RequestHandler):
     def get(self):
         #import pdb;pdb.set_trace()
         print 'LoginGet'
         #status,lu=self.check_User()
         print GlobalClass.user_login
         if GlobalClass.user_login=='':
+            
             template_values=dict()
-            template = JINJA_ENVIRONMENT.get_template('signup.html')
+            template = JINJA_ENVIRONMENT.get_template('login.html')
             self.response.write(template.render(template_values))
         else:
             print 'Login Get Else'
@@ -34,12 +35,41 @@ class SignUp(webapp2.RequestHandler):
         print 'Login Post'
         usrname=self.request.get('username')
         paswrd=self.request.get('password')
-        GlobalClass.user_login=usrname
-        muserKey=mUser(username=usrname,password=paswrd)
-        muserKey.put()
+        qresult=mUser.query(mUser.username==usrname,mUser.password==paswrd)
+        print qresult.count()
+        
+        for i in qresult:
+            print i
+        if qresult.count()!=0:
+            print qresult
+            GlobalClass.user_login=usrname
+            print 'in if', GlobalClass.user_login
+        else:
+            print 'Error'
+        self.redirect('/')    
+        
+class SignUp(webapp2.RequestHandler):
+    def get(self):
+        template_values=dict()
+        template = JINJA_ENVIRONMENT.get_template('signup.html')
+        self.response.write(template.render(template_values))
+        
+    def post(self):
+        print 'Login Post'
+        usrname=self.request.get('username')
+        paswrd=self.request.get('password')
+        qresult=mUser.query(mUser.username==usrname)
+        if qresult.count()==0:
+            GlobalClass.user_login=usrname
+            muserKey=mUser(username=usrname,password=paswrd)
+            muserKey.put()
+            self.redirect('/')
+            print 'f'
         #print muserKey[username]
-        self.redirect('/')
-
+        else:
+            print 'p'
+            self.redirect('/signup')
+        
 class Welcome(webapp2.RequestHandler):
     def get(self):
         
@@ -56,8 +86,10 @@ class lout(webapp2.RequestHandler):
         self.redirect('/')
 
 app = webapp2.WSGIApplication([
-    ('/', SignUp),
+    ('/', Login),
     ('/welcome.*',Welcome),
-    ('/lout',lout)
+    ('/lout',lout),
+    ('/signup',SignUp),
+    ('/verifyLogin',Login)
 ], debug=True)
                
