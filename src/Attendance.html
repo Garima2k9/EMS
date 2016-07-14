@@ -1,0 +1,22 @@
+<html>
+<head>
+</head>
+<body>
+Hello {{username}}, Manage your attendance
+<form method='get' action='/lout'>
+<input type='Submit' value='Logout'>
+</form>
+<form method="post" action='/Display'>
+View your Attendance
+<input type="submit" value='View your Attendence'>
+<input type="hidden" name="username" value="{{username}}">
+<input type="hidden" name="identifier" value='view'>
+</form>
+<form method="post" action='/EnterData'>
+Enter your Attendance
+<input type="submit" value='Enter Daily Entry'>
+<input type="hidden" name="username" value="{{username}}">
+<input type="hidden" name="identifier" value='entry'>
+</form>
+</body>
+</html>

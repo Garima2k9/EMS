@@ -11,6 +11,8 @@ class mUser(ndb.Model):
     username=ndb.StringProperty()
     password=ndb.StringProperty()
 
+
+
 class GlobalClass(webapp2.RequestHandler):
     user_login=''
        
@@ -84,12 +86,41 @@ class lout(webapp2.RequestHandler):
     def get(self):
         GlobalClass.user_login=''
         self.redirect('/')
-
+        
+class Attendance(webapp2.RequestHandler):
+    def get(self):
+        lusr=self.request.get('username')       
+        print lusr
+        template_values=dict()
+        template_values['username']=lusr
+        template = JINJA_ENVIRONMENT.get_template('Attendance.html')
+        self.response.write(template.render(template_values))
+    def post(self):
+        typ=self.request.get('identifier')
+        usr=self.request.get('username')
+        print typ,usr
+        if typ=='view':
+            template_values=dict()
+            template_values['username']=usr
+            print usr
+            template = JINJA_ENVIRONMENT.get_template('ViewAttendance.html')
+            self.response.write(template.render(template_values))
+        elif typ=='entry':
+            template_values=dict()
+            template_values['username']=usr
+            print usr
+            template = JINJA_ENVIRONMENT.get_template('Enter.html')
+            self.response.write(template.render(template_values))
+            pass
+            
 app = webapp2.WSGIApplication([
     ('/', Login),
     ('/welcome.*',Welcome),
     ('/lout',lout),
     ('/signup',SignUp),
-    ('/verifyLogin',Login)
+    ('/verifyLogin',Login),
+    ('/attendance',Attendance),
+    ('/Display',Attendance),
+    ('/EnterData',Attendance)
 ], debug=True)
                
