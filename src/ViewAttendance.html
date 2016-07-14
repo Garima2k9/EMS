@@ -3,6 +3,10 @@
 </head>
 <body>
 Hello {{username}}, Your attendance is as follows
-
+<ul>
+{% for i, j  in result %}
+	<li>{{i.TTime}}&nbsp &nbsp	{{j.TTime}}</li>
+{%- endfor %}
+</ul>
 </body>
 </html>

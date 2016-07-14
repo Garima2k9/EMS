@@ -11,6 +11,14 @@ class mUser(ndb.Model):
     username=ndb.StringProperty()
     password=ndb.StringProperty()
 
+class DailyEntry(ndb.Model):
+    username=ndb.StringProperty()
+    TTime=ndb.DateTimeProperty(auto_now_add=True)
+    type=ndb.StringProperty()
+    d=ndb.StringProperty()
+    m=ndb.StringProperty()
+    y=ndb.StringProperty()
+    ms=ndb.StringProperty()
 
 
 class GlobalClass(webapp2.RequestHandler):
@@ -102,7 +110,19 @@ class Attendance(webapp2.RequestHandler):
         if typ=='view':
             template_values=dict()
             template_values['username']=usr
+            
             print usr
+            iqresult=DailyEntry.query(DailyEntry.username==usr,DailyEntry.type=='In').order(-DailyEntry.ms)
+#             template_values['iresult']=iqresult
+            for i in iqresult:
+                print i
+            oqresult=DailyEntry.query(DailyEntry.username==usr,DailyEntry.type=='Out').order(-DailyEntry.ms)
+            result = map(None,iqresult, oqresult)
+            template_values['result']=result
+            for i in oqresult:
+                print i
+            for i,j in result:
+                print type(j.TTime-i.TTime)
             template = JINJA_ENVIRONMENT.get_template('ViewAttendance.html')
             self.response.write(template.render(template_values))
         elif typ=='entry':
@@ -111,7 +131,40 @@ class Attendance(webapp2.RequestHandler):
             print usr
             template = JINJA_ENVIRONMENT.get_template('Enter.html')
             self.response.write(template.render(template_values))
-            pass
+
+class InOut(webapp2.RequestHandler):
+    def get(self):
+        typ=self.request.get('type')
+        lusr=self.request.get('username') 
+        print typ,lusr
+        if typ=='In':
+            template_values=dict()
+            template_values['username']=lusr
+            template = JINJA_ENVIRONMENT.get_template('In.html')
+            self.response.write(template.render(template_values))
+        elif typ=='Out':
+            template_values=dict()
+            template_values['username']=lusr
+            template = JINJA_ENVIRONMENT.get_template('Out.html')
+            self.response.write(template.render(template_values))
+    def post(self):
+        typ=self.request.get('type')
+        lusr=self.request.get('username')
+        d=self.request.get('date')
+        m=self.request.get('month')
+        y= self.request.get('year')
+        ms=self.request.get('time')
+        print typ,lusr
+        if typ=='In':
+            de=DailyEntry(username=lusr,type=typ,d=d,m=m,y=y,ms=ms)
+            de.put()
+            query_params = {'username': lusr}
+            self.redirect('/EnterData?'+ urllib.urlencode(query_params))
+        elif typ=='Out':
+            de=DailyEntry(username=lusr,type=typ,d=d,m=m,y=y,ms=ms)
+            de.put()
+            query_params = {'username': lusr}
+            self.redirect('/EnterData?'+ urllib.urlencode(query_params))
             
 app = webapp2.WSGIApplication([
     ('/', Login),
@@ -121,6 +174,9 @@ app = webapp2.WSGIApplication([
     ('/verifyLogin',Login),
     ('/attendance',Attendance),
     ('/Display',Attendance),
-    ('/EnterData',Attendance)
+    ('/EnterData',Attendance),
+    ('/In',InOut),
+    ('/Out',InOut),
+    ('/submitEntry',InOut)
 ], debug=True)
                

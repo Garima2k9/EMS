@@ -1,0 +1,28 @@
+<html>
+<head>
+<script>
+function helperfunction(){
+var d = new Date();
+var n = d.getTime(); 
+var t=d.getDate()
+document.getElementById('tms').value=n
+document.getElementById('td').value=d.getDate()
+document.getElementById('tm').value=d.getMonth()
+document.getElementById('ty').value=d.getFullYear()
+}
+</script>
+</head>
+<body>
+Hello {{username}}, Enter your today's IN entry
+<form method="post" action='/submitEntry'> 
+<input type='hidden' id='tms' value='Enter Time' name='time'>
+<input id='td' type='text' value='Enter Date' name='date' >
+<input id='tm' type='text' value='Enter Month' name='month' >
+<input id='ty' type='text' value='Enter Year' name='year' >
+<input type="hidden" name="username" value="{{username}}">
+<input type="hidden" name="type" value="Out">
+<input type='button' name='intime' value='I am Out' onclick=helperfunction()>
+<input type="submit" value='Submit'>
+</form>
+</body>
+</html>

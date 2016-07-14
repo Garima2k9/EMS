@@ -3,9 +3,15 @@
 </head>
 <body>
 Hello {{username}}, Enter your today's entry
-<form>
-<input type='time' value='Enter Time' name='timestamp'>
-<input type='submit' value='I am in'>
+<form method="get" action="In">
+<input type="hidden" name="username" value="{{username}}">
+<input type="hidden" name="type" value="In">
+<input type="submit" value='IN'>
+</form>
+<form method="get" action="Out">
+<input type="hidden" name="username" value="{{username}}">
+<input type="hidden" name="type" value="Out">
+<input type="submit" value='OUT'>
 </form>
 </body>
 </html>
