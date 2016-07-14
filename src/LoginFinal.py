@@ -63,8 +63,12 @@ class SignUp(webapp2.RequestHandler):
             GlobalClass.user_login=usrname
             muserKey=mUser(username=usrname,password=paswrd)
             muserKey.put()
+            self.redirect('/')
+            print 'f'
         #print muserKey[username]
-        self.redirect('/signup')
+        else:
+            print 'p'
+            self.redirect('/signup')
         
 class Welcome(webapp2.RequestHandler):
     def get(self):
