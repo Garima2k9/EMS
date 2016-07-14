@@ -1,7 +1,16 @@
+<!DOCTYPE html>
 <html>
+
 <head>
+	<title>Daily Marker</title>
+	<link rel="stylesheet" href="files/css/bootstrap.css">
+	<link rel="stylesheet" href="files/css/style.css">
+	<link rel="stylesheet" href="files/rs-plugin/css/settings.css">
+	
 </head>
+
 <body>
+<<<<<<< HEAD
 Hello HTML User, {{username}}
 <form method='get' action='/lout'>
 <input type='Submit' value='Logout'>
@@ -15,5 +24,78 @@ Hello HTML User, {{username}}
 <input type="hidden" name="username" value={{username}}>
 <input type='Submit' value='Tasklist'>
 </form>
+=======
+	<div class="sidebar-menu-container" id="sidebar-menu-container">
+		<div class="sidebar-menu-push">
+			<div class="sidebar-menu-inner">
+				<header class="site-header">
+					<div id="main-header" class="main-header header-sticky">
+						<div class="inner-header clearfix">
+							<div class="logo">
+								<a href="#">Daily Marker</a>
+							</div>
+							<div class="header-right-toggle pull-right hidden-md hidden-lg">
+							</div>
+							<nav class="main-navigation pull-right hidden-xs hidden-sm">
+								<ul>
+									<li><a href="#">Dashboard</a></li>
+									<li><a href="#">Log Hours</a></li>
+									<li><a href="#">Task List</a></li>
+									<li><a id = "logout_button" href="#">Logout</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</header>
+
+				<div class="slider">
+					<div class="fullwidthbanner-container">
+						<div class="fullwidthbanner">
+							<ul>
+							<li class="first-slide" data-transition="fade" data-slotamount="10" data-masterspeed="300">
+									<img src="files/images/1.jpg" data-fullwidthcentering="on" alt="slide">
+									<div class="tp-caption first-line lft tp-resizeme start" data-x="center" data-hoffset="0" data-y="250" data-speed="1000" data-start="200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">Welcome {{username}} ,</div>
+									<div class="tp-caption second-line lfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="340" data-speed="1000" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">Manage your tasks, daily schedule on a single platform</div>
+									
+								</li>
+								<li class="first-slide" data-transition="fade" data-slotamount="10" data-masterspeed="300">
+									<img src="files/images/2.jpg" data-fullwidthcentering="on" alt="slide">
+									<div class="tp-caption first-line lft tp-resizeme start" data-x="center" data-hoffset="0" data-y="250" data-speed="1000" data-start="200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">Log Your Daily Work Hours</div>
+									<div class="tp-caption second-line lfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="340" data-speed="1000" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">Because 8 and a half hours is a must</div>
+									<div class="tp-caption slider-btn sfb tp-resizeme start" data-x="left" data-hoffset="0" data-y="510" data-speed="1000" data-start="2200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0"><a href="#" class="btn btn-slider">Enter Punch in time</a></div>
+									<div class="tp-caption slider-btn sfb tp-resizeme start" data-x="right" data-hoffset="0" data-y="510" data-speed="1000" data-start="2200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0"><a href="#" class=" second-btn btn btn-slider">Enter Punch Out Time</a></div>
+									
+								</li>
+								<li class="first-slide" data-transition="fade" data-slotamount="10" data-masterspeed="300">
+									<img src="files/images/3.jpg" data-fullwidthcentering="on" alt="slide">
+									<div class="tp-caption first-line lft tp-resizeme start" data-x="center" data-hoffset="0" data-y="250" data-speed="1000" data-start="200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">Manage Tasks</div>
+									<div class="tp-caption second-line lfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="340" data-speed="1000" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">Set Daily targets for efficient project management </div>
+									<div class="tp-caption slider-btn sfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="510" data-speed="1000" data-start="2200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0"><a href="#" class=" second-btn btn btn-slider">View Tasks</a></div>
+								</l>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+					<script type="text/javascript" src="files/js/jquery-1.11.1.min.js"></script>
+
+	<!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+    <script src="files/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="files/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+	<script src="files/js/plugins.js"></script>
+	<script src="files/js/custom.js"></script>
+
+	<script type="text/javascript">
+	window.onload=function() {
+   document.getElementById("logout_button").onclick=function() {
+     var logout_form = document.createElement("form");
+     logout_form.action="lout";
+     logout_form.target="myFrame";
+     logout_form.method="GET";
+     logout_form.submit();
+     return false;
+   }
+ }</script>
+>>>>>>> c35044f8f3469626c2100699df802c40820844e4
 </body>
 </html>
