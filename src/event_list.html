@@ -1,0 +1,27 @@
+<html>
+<head>
+<title> Event Lists</title>
+</head>
+
+<body>
+
+<center>
+<br>
+Tasks in {{list_name}}: 
+<br><br>
+
+{% for entry in list_names %}
+        <br> {{ entry }}
+      {% endfor %}      
+
+<br><br>
+
+       <form id = "event_list" action = "tasks?username={{username}}&list_name={{list_name}}" method = "post">Create New Task:
+        <input type='text' value="" name="event_name">
+        <input type="submit" value="Create Task">
+      </form>
+      
+ 	</center>    
+
+</body>
+</html>
