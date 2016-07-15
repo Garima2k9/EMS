@@ -1,4 +1,4 @@
-<html>
+<!--  <html>
 <head>
 </head>
 <body>
@@ -20,3 +20,87 @@ Enter your Attendance
 </form>
 </body>
 </html>
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Daily Marker</title>
+	<link rel="stylesheet" href="files/css/bootstrap.css">
+	<link rel="stylesheet" href="files/css/style.css">
+	<link rel="stylesheet" href="files/rs-plugin/css/settings.css">
+
+</head>
+
+<body>
+
+
+<form method='get' action='/attendance'>
+<input type="hidden" name="username" value={{username}}>
+<input type='Submit' value='Attendance'>
+</form>
+<form method='get' action='/Tasklist'>
+<input type="hidden" name="username" value={{username}}>
+<input type='Submit' value='Tasklist'>
+</form>
+
+
+	<div class="sidebar-menu-container" id="sidebar-menu-container">
+		<div class="sidebar-menu-push">
+			<div class="sidebar-menu-inner">
+				<header class="site-header">
+					<div id="main-header" class="main-header header-sticky">
+						<div class="inner-header clearfix">
+							<div class="logo">
+								<a href="#">Employee MAnagement System</a>
+							</div>
+							<div class="header-right-toggle pull-right hidden-md hidden-lg">
+							</div>
+							<nav class="main-navigation pull-right hidden-xs hidden-sm">
+								<ul>
+									<li><a href="#">{{username}}</a></li>
+									<li><a id="attendances" href="/attendance?username={{username}}">Attendance</a></li>
+									<li><a href="#">Task List</a></li>
+									<li><a id = "logout_button" href="/lout">Logout</a></li>
+								</ul>
+							</nav>
+						</div>
+					</div>
+				</header>
+
+				<div class="slider">
+					<div class="fullwidthbanner-container">
+						<div class="fullwidthbanner">
+							<ul>
+							
+								
+								<li class="first-slide" data-transition="fade" data-slotamount="10" data-masterspeed="300">
+									<img src="files/images/3.jpg" data-fullwidthcentering="on" alt="slide">
+									<div class="tp-caption first-line lft tp-resizeme start" data-x="center" data-hoffset="0" data-y="250" data-speed="1000" data-start="200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">Enter daily Entries</div>
+									<div class="tp-caption second-line lfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="340" data-speed="1000" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">Set Daily targets for efficient project management </div>
+									<div class="tp-caption slider-btn sfb tp-resizeme start" data-x="left" data-hoffset="0" data-y="510" data-speed="1000" data-start="2200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0"><a href="/In?username={{username}}&type=In" class="btn btn-slider">Enter Punch in time</a></div>
+									<div class="tp-caption slider-btn sfb tp-resizeme start" data-x="right" data-hoffset="0" data-y="510" data-speed="1000" data-start="2200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0"><a href="/Out?username={{username}}&type=Out" class=" second-btn btn btn-slider">Enter Punch Out Time</a></div>
+								</li>
+								<li class="first-slide" data-transition="fade" data-slotamount="10" data-masterspeed="300">
+									<img src="files/images/2.jpg" data-fullwidthcentering="on" alt="slide">
+									<div class="tp-caption first-line lft tp-resizeme start" data-x="center" data-hoffset="0" data-y="250" data-speed="1000" data-start="200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">View your attendance</div>
+									<div class="tp-caption second-line lfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="340" data-speed="1000" data-start="800" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0">Because 8 and a half hours is a must</div>
+									<div class="tp-caption slider-btn sfb tp-resizeme start" data-x="center" data-hoffset="0" data-y="510" data-speed="1000" data-start="2200" data-easing="Power4.easeOut" data-splitin="none" data-splitout="none" data-elementdelay="0" data-endelementdelay="0"><form method="post" action='/Display'><input type="submit" value='View your Attendence'><input type="hidden" name="username" value="{{username}}"><input type="hidden" name="identifier" value='view'></form></div>	
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+
+					<script type="text/javascript" src="files/js/jquery-1.11.1.min.js"></script>
+
+	<!-- SLIDER REVOLUTION 4.x SCRIPTS  -->
+    <script src="files/rs-plugin/js/jquery.themepunch.tools.min.js"></script>
+    <script src="files/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>
+	<script src="files/js/plugins.js"></script>
+	<script src="files/js/custom.js"></script>
+
+
+</body>
+</html>
+
