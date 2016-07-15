@@ -35,10 +35,17 @@
 							</div>
 							<nav class="main-navigation pull-right hidden-xs hidden-sm">
 								<ul>
+<<<<<<< HEAD
 									<li><a href="#">{{username}}</a></li>
 									<li><a id="attendances" href="/attendance?username={{username}}">Attendance</a></li>
 									<li><a href="#">Task List</a></li>
 									<li><a id = "logout_button" href="/lout">Logout</a></li>
+=======
+									<li><a href="#">Dashboard</a></li>
+									<li><a href="#">Log Hours</a></li>
+									<li><a href="getusernametemp">Task List</a></li>
+									<li><a id = "logout_button" href="#">Logout</a></li>
+>>>>>>> Prefinal stage: Refresh Problem pending4
 								</ul>
 							</nav>
 						</div>
@@ -80,6 +87,21 @@
 	<script src="files/js/plugins.js"></script>
 	<script src="files/js/custom.js"></script>
 
+<<<<<<< HEAD
 
+=======
+	<script type="text/javascript">
+	 window.onload=function() {
+     document.getElementById("logout_button").onclick=function() {
+     var logout_form = document.createElement("form");
+     logout_form.action="lout";
+     logout_form.target="myFrame";
+     logout_form.method="GET";
+     logout_form.submit();
+     return false;
+   }
+ }
+ </script>
+>>>>>>> Prefinal stage: Refresh Problem pending4
 </body>
 </html>

@@ -1,0 +1,29 @@
+<html>
+<head>
+<title> Task Lists</title>
+</head>
+
+<body>
+
+<center>
+<br>
+{{username}}'s Lists: 
+<br><br>
+
+{% for entry in list_names %}
+        <br><a href = "tasks?username={{username}}&list_name={{entry}}">  {{ entry }}</a>
+          
+      {% endfor %}      
+
+<br><br>
+
+       <form id = "list_links"action = "gotonext" method = "post">Create New List:
+        <input type='text' value="" name="list_name">
+        <input type='hidden' value="{{username}}" name="username">
+        <input type="submit" value="Create">
+      </form>
+      
+ 	</center>    
+
+</body>
+</html>
