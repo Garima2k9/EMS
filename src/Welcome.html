@@ -25,7 +25,7 @@
 								<ul>
 									<li><a href="#">Dashboard</a></li>
 									<li><a href="#">Log Hours</a></li>
-									<li><a href="#">Task List</a></li>
+									<li><a href="getusernametemp">Task List</a></li>
 									<li><a id = "logout_button" href="#">Logout</a></li>
 								</ul>
 							</nav>
@@ -71,8 +71,8 @@
 	<script src="files/js/custom.js"></script>
 
 	<script type="text/javascript">
-	window.onload=function() {
-   document.getElementById("logout_button").onclick=function() {
+	 window.onload=function() {
+     document.getElementById("logout_button").onclick=function() {
      var logout_form = document.createElement("form");
      logout_form.action="lout";
      logout_form.target="myFrame";
@@ -80,6 +80,7 @@
      logout_form.submit();
      return false;
    }
- }</script>
+ }
+ </script>
 </body>
 </html>

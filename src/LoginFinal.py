@@ -1,7 +1,6 @@
 import jinja2,os,webapp2,urllib
 from google.appengine.ext import ndb
 
-
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
     extensions=['jinja2.ext.autoescape'],
@@ -13,8 +12,15 @@ class mUser(ndb.Model):
 
 class GlobalClass(webapp2.RequestHandler):
     user_login=''
-       
+    
+class List(ndb.Model):
+    list_name = ndb.StringProperty()
+    list_username = ndb.StringProperty()
 
+class Event(ndb.Model):
+    event_name = ndb.StringProperty()
+    associated_list = ndb.StringProperty()
+        
 class Login(webapp2.RequestHandler):
     def get(self):
         #import pdb;pdb.set_trace()
@@ -79,17 +85,92 @@ class Welcome(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('Welcome.html')
         self.response.write(template.render(template_values))
         print lusr
-
+        
+class getusernametemp(webapp2.RequestHandler):
+    def get(self):
+        print "get-username"
+        template_values=dict()
+        template_values['username']="luser"
+        template = JINJA_ENVIRONMENT.get_template('get-username.html')
+        self.response.write(template.render(template_values))
+        
 class lout(webapp2.RequestHandler):
     def get(self):
         GlobalClass.user_login=''
         self.redirect('/')
+        
+class gotonext(webapp2.RequestHandler):
+    def get(self):
+        usr = self.request.get('username')
+        template_values = dict()
+        template_values['username'] = usr
+        
+        list_query = List.query()
+        
+        arr = []
+        
+        for entry in list_query:
+            print entry.list_name
+            if (usr == entry.list_username):
+                arr.append(entry.list_name)
+                template_values['list_names'] = arr
+            
+        template = JINJA_ENVIRONMENT.get_template('task_list.html')
+        self.response.write(template.render(template_values))   
+        
+    def post(self):
+        print 'gotonext Post'
+        usr = self.request.get('username')
+        listname=self.request.get('list_name')
+        print usr
+        print listname
+        if listname == '':
+            listname = "Default_List"
+            
+        list_element = List(list_name = listname, list_username = usr)
+        list_element.put()
+        print 'redirected'
+        self.redirect('/gotonext?username='+usr)
+        
+class tasks(webapp2.RequestHandler):
+    def get(self):
+        event_name = self.request.get('event_name')
+        template_values = dict()
+        list_name = self.request.get('list_name')
+        template_values['list_name'] = list_name
+        
+        event_query = Event.query()
+        
+        arr = []
+        
+        for entry in event_query:
+            if list_name == entry.associated_list:
+                print entry.event_name
+                arr.append(entry.event_name)
+                template_values['list_names'] = arr
+   
+        template = JINJA_ENVIRONMENT.get_template('event_list.html')
+        self.response.write(template.render(template_values))   
+        
+    def post(self):
+        print 'events Post'
+        event_name = self.request.get('event_name')
+        usr = self.request.get('username')
+        print event_name
+        associated_list = self.request.get('list_name')
+            
+        event_element = Event(event_name = event_name, associated_list = associated_list)
+        event_element.put()
+        self.redirect('/tasks?username='+usr+'&list_name='+associated_list)
 
 app = webapp2.WSGIApplication([
     ('/', Login),
-    ('/welcome.*',Welcome),
+    ('/welcome',Welcome),
     ('/lout',lout),
     ('/signup',SignUp),
-    ('/verifyLogin',Login)
+    ('/verifyLogin',Login),
+    ('/getusernametemp',getusernametemp),
+    ('/gotonext',gotonext),
+    ('/tasks', tasks) 
 ], debug=True)
                
