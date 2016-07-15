@@ -109,7 +109,6 @@ class lout(webapp2.RequestHandler):
         GlobalClass.user_login=''
         self.redirect('/')
         
-<<<<<<< HEAD
 class Attendance(webapp2.RequestHandler):
     def get(self):
         lusr=self.request.get('username')       
@@ -146,7 +145,7 @@ class Attendance(webapp2.RequestHandler):
             print usr
             template = JINJA_ENVIRONMENT.get_template('Enter.html')
             self.response.write(template.render(template_values))
-=======
+
 class gotonext(webapp2.RequestHandler):
     def get(self):
         usr = self.request.get('username')
@@ -182,7 +181,7 @@ class gotonext(webapp2.RequestHandler):
         
 class tasks(webapp2.RequestHandler):
     def get(self):
-        event_name = self.request.get('event_name')
+#         event_name = self.request.get('event_name')
         template_values = dict()
         list_name = self.request.get('list_name')
         template_values['list_name'] = list_name
@@ -210,7 +209,7 @@ class tasks(webapp2.RequestHandler):
         event_element = Event(event_name = event_name, associated_list = associated_list)
         event_element.put()
         self.redirect('/tasks?username='+usr+'&list_name='+associated_list)
->>>>>>> Prefinal stage: Refresh Problem pending4
+
 
 class InOut(webapp2.RequestHandler):
     def get(self):
@@ -252,17 +251,13 @@ app = webapp2.WSGIApplication([
     ('/lout',lout),
     ('/signup',SignUp),
     ('/verifyLogin',Login),
-<<<<<<< HEAD
     ('/attendance',Attendance),
     ('/Display',Attendance),
     ('/EnterData',Attendance),
     ('/In',InOut),
     ('/Out',InOut),
-    ('/submitEntry',InOut)
-=======
-    ('/getusernametemp',getusernametemp),
+    ('/submitEntry',InOut),
     ('/gotonext',gotonext),
     ('/tasks', tasks) 
->>>>>>> Prefinal stage: Refresh Problem pending4
 ], debug=True)
                
