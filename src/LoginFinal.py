@@ -1,5 +1,6 @@
 import jinja2,os,webapp2,urllib
 from google.appengine.ext import ndb
+import datetime
 
 JINJA_ENVIRONMENT = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -30,6 +31,8 @@ class List(ndb.Model):
 class Event(ndb.Model):
     event_name = ndb.StringProperty()
     associated_list = ndb.StringProperty()
+    start_time = ndb.DateTimeProperty()
+    end_time = ndb.DateTimeProperty()
         
 class Login(webapp2.RequestHandler):
     def get(self):
@@ -95,15 +98,7 @@ class Welcome(webapp2.RequestHandler):
         template = JINJA_ENVIRONMENT.get_template('Welcome.html')
         self.response.write(template.render(template_values))
         print lusr
-        
-class getusernametemp(webapp2.RequestHandler):
-    def get(self):
-        print "get-username"
-        template_values=dict()
-        template_values['username']="luser"
-        template = JINJA_ENVIRONMENT.get_template('get-username.html')
-        self.response.write(template.render(template_values))
-        
+                
 class lout(webapp2.RequestHandler):
     def get(self):
         GlobalClass.user_login=''
@@ -188,13 +183,15 @@ class tasks(webapp2.RequestHandler):
         
         event_query = Event.query()
         
-        arr = []
+        events = []
         
         for entry in event_query:
             if list_name == entry.associated_list:
                 print entry.event_name
-                arr.append(entry.event_name)
-                template_values['list_names'] = arr
+                print entry.start_time
+                print entry.end_time
+                events.append(entry)
+                template_values['event_names'] = events
    
         template = JINJA_ENVIRONMENT.get_template('event_list.html')
         self.response.write(template.render(template_values))   
@@ -205,11 +202,26 @@ class tasks(webapp2.RequestHandler):
         usr = self.request.get('username')
         print event_name
         associated_list = self.request.get('list_name')
-            
-        event_element = Event(event_name = event_name, associated_list = associated_list)
+        st_date = self.request.get('start_date').split('-')
+        st_date = map(int, st_date)
+        
+        st_time = self.request.get('start_time').split(':')
+        st_time = map(int, st_time)
+        st_date_part = datetime.datetime(st_date[0],st_date[1],st_date[2], st_time[0], st_time[1],0,0)
+    
+        starttime = st_date_part
+        
+        end_date = self.request.get('end_date').split('-')
+        end_date = map(int, end_date)
+        end_time = self.request.get('end_time').split(':')
+        end_time = map(int, end_time)
+        end_date_part = datetime.datetime(end_date[0], end_date[1],end_date[2], end_time[0], end_time[1], 0, 0)
+        
+        endtime = end_date_part
+        
+        event_element = Event(event_name = event_name, associated_list = associated_list, start_time = starttime, end_time = endtime)
         event_element.put()
         self.redirect('/tasks?username='+usr+'&list_name='+associated_list)
-
 
 class InOut(webapp2.RequestHandler):
     def get(self):

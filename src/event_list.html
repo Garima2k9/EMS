@@ -10,18 +10,22 @@
 Tasks in {{list_name}}: 
 <br><br>
 
-{% for entry in list_names %}
-        <br> {{ entry }}
+{% for event in event_names %}
+        <br> {{ event.start_time }} &emsp; {{ event.event_name }} &emsp; {{ event.end_time }}
       {% endfor %}      
 
 <br><br>
 
        <form id = "event_list" action = "tasks?username={{username}}&list_name={{list_name}}" method = "post">Create New Task:
         <input type='text' value="" name="event_name">
-        <input type="submit" value="Create Task">
+        <br><br>Start Date: <input type = 'text' value = "" name = 'start_date'> 
+          <t> Start Time : <input type = 'text' value = "" name = 'start_time'>
+        
+        <br><br>End Date: <input type = 'text' value = "" name = 'end_date'>
+          <t> End Time : <input type = 'text' value = "" name = 'end_time'>
+        <br><br><input type="submit" value="Create Task">
       </form>
-      
- 	</center>    
+  </center>    
 
 </body>
 </html>
